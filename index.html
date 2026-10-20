@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiswaCraft AI Pro - Platform Bisnis & Keuangan Pelajar</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#eef2ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans antialiased transition-colors duration-300">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🚀</span>
+                <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">SiswaCraft AI Pro</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-sm">
+                    🌙 / ☀️
+                </button>
+                <a href="#dashboard" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-indigo-700 transition hidden sm:inline-block">
+                    Mulai Berbisnis
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-indigo-600 to-purple-700 text-white py-16 px-4 text-center">
+        <div class="max-w-3xl mx-auto">
+            <span class="bg-indigo-800/60 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Enterprise Startup Hub Remaja</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold mt-4 leading-tight">
+                Kelola Promosi, Pesanan, & Keuangan dalam Satu Platform
+            </h2>
+            <p class="mt-4 text-indigo-100 text-base md:text-lg">
+                Solusi lengkap wirausaha muda: AI Copywriting, Format Order WA, hingga Buku Kas Digital!
+            </p>
+        </div>
+    </section>
+
+    <!-- Dashboard Fitur -->
+    <main id="dashboard" class="max-w-5xl mx-auto px-4 py-12">
+        
+        <!-- Tab Menu Navigasi -->
+        <div class="flex flex-wrap gap-2 mb-8 border-b border-slate-200 dark:border-slate-700 pb-4">
+            <button onclick="switchTab('order')" id="btn-order" class="px-4 py-2 rounded-lg font-semibold text-sm bg-indigo-600 text-white transition">🛒 Form Order WA</button>
+            <button onclick="switchTab('kas')" id="btn-kas" class="px-4 py-2 rounded-lg font-semibold text-sm bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition">💰 Buku Kas & Keuangan</button>
+            <button onclick="switchTab('promo')" id="btn-promo" class="px-4 py-2 rounded-lg font-semibold text-sm bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition">✨ Generator Promo</button>
+            <button onclick="switchTab('konten')" id="btn-konten" class="px-4 py-2 rounded-lg font-semibold text-sm bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition">🎬 Ide Konten</button>
+            <button onclick="switchTab('history')" id="btn-history" class="px-4 py-2 rounded-lg font-semibold text-sm bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition">📂 Riwayat</button>
+        </div>
+
+        <!-- TAB 1: FORM ORDER WA -->
+        <div id="tab-order" class="tab-content bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700">
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">🛒 Pembuat Format Order WhatsApp Pro</h3>
+            <div class="grid lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">WA Penjual (Awali 62)</label>
+                            <input type="text" id="waPhone" value="628123456789" class="w-full border dark:border-slate-600 bg-transparent rounded-lg p-2.5 text-sm focus:outline-none" oninput="updateWAPreview()">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Style Template</label>
+                            <select id="waStyle" class="w-full border dark:border-slate-600 bg-white dark:bg-slate-700 rounded-lg p-2.5 text-sm focus:outline-none" onchange="updateWAPreview()">
+                                <option value="invoice">Invoice Rapi</option>
+                                <option value="santai">Santai & Ringkas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Nama Produk / Jasa</label>
+                        <input type="text" id="waItem" placeholder="Contoh: Kaus Custom Kelas" class="w-full border dark:border-slate-600 bg-transparent rounded-lg p-2.5 text-sm focus:outline-none" oninput="updateWAPreview()">
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Harga (Rp)</label>
+                            <input type="number" id="waPrice" placeholder="85000" class="w-full border dark:border-slate-600 bg-transparent rounded-lg p-2.5 text-sm focus:outline-none" oninput="updateWAPreview()">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Jumlah (Qty)</label>
+                            <input type="number" id="waQty" value="1" min="1" class="w-full border dark:border-slate-600 bg-transparent rounded-lg p-2.5 text-sm focus:outline-none" oninput="updateWAPreview()">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Ongkir (Rp)</label>
+                            <input type="number" id="waShipping" placeholder="10000" class="w-full border dark:border-slate-600 bg-transparent rounded-lg p-2.5 text-sm focus:outline-none" oninput="updateWAPreview()">
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 bg-emerald-950/10 dark:bg-emerald-950/30 p-5 rounded-2xl border border-emerald-500/20 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-emerald-600 dark:text-emerald-400 text-sm mb-3">💬 Live Preview Chat WA</h4>
+                        <div class="bg-emerald-50 dark:bg-slate-900 border border-emerald-200 dark:border-slate-700 p-4 rounded-xl text-xs font-mono whitespace-pre-line text-slate-700 dark:text-slate-300 leading-relaxed overflow-y-auto max-h-60" id="waChatPreview">
+                            Masukkan data pesanan di sebelah kiri...
+                        </div>
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <a id="btnSendWA" href="#" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow-lg text-xs flex items-center justify-center gap-2 transition">
+                            📲 Kirim Pesan ke WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: BUKU KAS & KEUANGAN DIGITAL -->
+        <div id="tab-kas" class="tab-content hidden bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700">
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">💰 Buku Kas & Catatan Keuangan</h3>
+            
+            <!-- Ringkasan Saldo -->
+            <div class="grid grid-cols-3 gap-4 mb-6">
+                <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border dark:border-slate-700">
+                    <p class="text-xs text-slate-500 uppercase font-semibold">Total Pemasukan</p>
+                    <p id="totalIncome" class="text-lg md:text-2xl font-black text-emerald-500 mt-1">Rp 0</p>
+                </div>
+                <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border dark:border-slate-700">
+                    <p class="text-xs text-slate-500 uppercase font-semibold">Total Pengeluaran</p>
+                    <p id="totalExpense" class="text-lg md:text-2xl font-black text-rose-500 mt-1">Rp 0</p>
+                </div>
+                <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border dark:border-slate-700">
+                    <p class="text-xs text-slate-500 uppercase font-semibold">Saldo Bersih</p>
+                    <p id="totalBalance" class="text-lg md:text-2xl font-black text-indigo-500 mt-1">Rp 0</p>
+                </div>
+            </div>
+
+            <!-- Form Tambah Transaksi -->
+            <div class="grid md:grid-cols-4 gap-3 mb-6">
+                <input type="text" id="txDesc" placeholder="Keterangan (Cth: Jual Kaus / Beli Bahan)" class="border dark:border-slate-600 bg-transparent rounded-lg p-2.5 text-sm focus:outline-none">
+                <input type="number" id="txAmount" placeholder="Nominal (Rp)" class="border dark:border-slate-600 bg-transparent rounded-lg p-2.5 text-sm focus:outline-none">
+                <select id="txType" class="border dark:border-slate-600 bg-white dark:bg-slate-700 rounded-lg p-2.5 text-sm focus:outline-none">
+                    <option value="income">Pemasukan (+)</option>
+                    <option value="expense">Pengeluaran (-)</option>
+                </select>
+                <button onclick="addTransaction()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-lg text-sm transition">➕ Tambah Transaksi</button>
+            </div>
+
+            <!-- Tabel Transaksi -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-100 dark:bg-slate-700 text-xs uppercase text-slate-500 dark:text-slate-300">
+                        <tr>
+                            <th class="p-3">Tanggal</th>
+                            <th class="p-3">Keterangan</th>
+                            <th class="p-3">Tipe</th>
+                            <th class="p-3">Nominal</th>
+                            <th class="p-3">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="txTableBody">
+                        <tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada catatan transaksi.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 3: GENERATOR PROMO -->
+        <div id="tab-promo" class="tab-content hidden bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700">
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">🤖 AI Copywriting & Pricing Calculator</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-1">Nama Produk / Jasa</label>
+                        <input type="text" id="pName" placeholder="Contoh: Keripik Pisang Cokelat" class="w-full border dark:border-slate-600 bg-transparent rounded-lg p-3 text-sm focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-1">Modal Produksi (Rp)</label>
+                        <input type="number" id="pCost" placeholder="10000" class="w-full border dark:border-slate-600 bg-transparent rounded-lg p-3 text-sm focus:outline-none">
+                    </div>
+                    <button onclick="runPromoAI()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg shadow-md transition">✨ Proses dengan AI</button>
+                </div>
+                <div id="promoResult" class="hidden bg-slate-50 dark:bg-slate-900 p-5 rounded-xl border dark:border-slate-700 space-y-4 flex flex-col justify-between">
+                    <div>
+                        <p class="text-xs text-slate-500">Rekomendasi Harga Jual:</p>
+                        <p id="resPrice" class="text-xl font-black text-emerald-500 mb-3"></p>
+                        <p class="text-xs text-slate-500">Caption Promosi:</p>
+                        <p id="resCaption" class="text-sm bg-white dark:bg-slate-800 p-3 rounded border dark:border-slate-700 mt-1"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: IDE KONTEN -->
+        <div id="tab-konten" class="tab-content hidden bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700">
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">🎬 Generator Ide Konten Video Pendek</h3>
+            <div class="space-y-4 max-w-xl">
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Niche / Jenis Usaha</label>
+                    <input type="text" id="cTopic" placeholder="Contoh: Jasa Desain Grafis" class="w-full border dark:border-slate-600 bg-transparent rounded-lg p-3 text-sm focus:outline-none">
+                </div>
+                <button onclick="runContentAI()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition">💡 Buatkan 3 Ide Konten</button>
+            </div>
+            <div id="contentResult" class="hidden mt-6 space-y-3">
+                <div id="contentList" class="space-y-3"></div>
+            </div>
+        </div>
+
+        <!-- TAB 5: RIWAYAT -->
+        <div id="tab-history" class="tab-content hidden bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold flex items-center gap-2">📂 Riwayat Tersimpan</h3>
+                <button onclick="clearHistory()" class="text-xs text-rose-500 hover:underline">Hapus Semua</button>
+            </div>
+            <div id="historyList" class="space-y-3">
+                <p class="text-sm text-slate-400">Belum ada riwayat tersimpan.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-6 text-center text-xs text-slate-500">
+        <p>&copy; 2026 SiswaCraft AI Pro. Dibangun oleh Talenta Muda SMK/SMA Indonesia.</p>
+    </footer>
+
+    <!-- JavaScript Logika Aplikasi -->
+    <script>
+        function toggleDarkMode() { document.documentElement.classList.toggle('dark'); }
+
+        function switchTab(tabId) {
+            ['order', 'kas', 'promo', 'konten', 'history'].forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+                document.getElementById(`btn-${t}`).className = "px-4 py-2 rounded-lg font-semibold text-sm bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition";
+            });
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`btn-${tabId}`).className = "px-4 py-2 rounded-lg font-semibold text-sm bg-indigo-600 text-white transition";
+            if(tabId === 'history') loadHistory();
+            if(tabId === 'kas') loadTransactions();
+        }
+
+        function updateWAPreview() {
+            const phone = document.getElementById('waPhone').value.trim();
+            const item = document.getElementById('waItem').value.trim() || '[Nama Produk]';
+            const price = parseFloat(document.getElementById('waPrice').value) || 0;
+            const qty = parseInt(document.getElementById('waQty').value) || 1;
+            const shipping = parseFloat(document.getElementById('waShipping').value) || 0;
+            const total = (price * qty) + shipping;
+            const fmt = (n) => 'Rp ' + n.toLocaleString('id-ID');
+
+            const msg = `Halo Kak, saya mau pesan:\n• Produk: ${item}\n• Qty: ${qty} pcs\n• Total + Ongkir: ${fmt(total)}\n\nMohon konfirmasi ketersediaannya ya Kak!`;
+            document.getElementById('waChatPreview').innerText = msg;
+            document.getElementById('btnSendWA').href = `https://wa.me/${phone || '628123456789'}?text=${encodeURIComponent(msg)}`;
+        }
+
+        // Buku Kas Logic
+        function addTransaction() {
+            const desc = document.getElementById('txDesc').value.trim();
+            const amount = parseFloat(document.getElementById('txAmount').value);
+            const type = document.getElementById('txType').value;
+
+            if(!desc || isNaN(amount)) { alert("Lengkapi keterangan dan nominal!"); return; }
+
+            let txs = JSON.parse(localStorage.getItem('siswacraft_tx') || '[]');
+            txs.unshift({ desc, amount, type, date: new Date().toLocaleDateString() });
+            localStorage.setItem('siswacraft_tx', JSON.stringify(txs));
+
+            document.getElementById('txDesc').value = '';
+            document.getElementById('txAmount').value = '';
+            loadTransactions();
+        }
+
+        function loadTransactions() {
+            let txs = JSON.parse(localStorage.getItem('siswacraft_tx') || '[]');
+            const tbody = document.getElementById('txTableBody');
+            let income = 0, expense = 0;
+
+            if(txs.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada catatan transaksi.</td></tr>`;
+                document.getElementById('totalIncome').innerText = 'Rp 0';
+                document.getElementById('totalExpense').innerText = 'Rp 0';
+                document.getElementById('totalBalance').innerText = 'Rp 0';
+                return;
+            }
+
+            let html = '';
+            txs.forEach((t, index) => {
+                if(t.type === 'income') income += t.amount;
+                else expense += t.amount;
+
+                html += `<tr class="border-b dark:border-slate-700">
+                    <td class="p-3 text-xs text-slate-500">${t.date}</td>
+                    <td class="p-3 font-medium">${t.desc}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded text-xs font-bold ${t.type === 'income' ? 'bg-emerald-500/20 text-emerald-500' : 'bg-rose-500/20 text-rose-500'}">${t.type === 'income' ? 'Pemasukan' : 'Pengeluaran'}</span></td>
+                    <td class="p-3 font-bold">Rp ${t.amount.toLocaleString('id-ID')}</td>
+                    <td class="p-3"><button onclick="deleteTx(${index})" class="text-rose-500 text-xs hover:underline">Hapus</button></td>
+                </tr>`;
+            });
+
+            tbody.innerHTML = html;
+            document.getElementById('totalIncome').innerText = 'Rp ' + income.toLocaleString('id-ID');
+            document.getElementById('totalExpense').innerText = 'Rp ' + expense.toLocaleString('id-ID');
+            document.getElementById('totalBalance').innerText = 'Rp ' + (income - expense).toLocaleString('id-ID');
+        }
+
+        function deleteTx(index) {
+            let txs = JSON.parse(localStorage.getItem('siswacraft_tx') || '[]');
+            txs.splice(index, 1);
+            localStorage.setItem('siswacraft_tx', JSON.stringify(txs));
+            loadTransactions();
+        }
+
+        function runPromoAI() {
+            const name = document.getElementById('pName').value;
+            const cost = parseFloat(document.getElementById('pCost').value);
+            if(!name || isNaN(cost)) { alert("Lengkapi data!"); return; }
+            document.getElementById('resPrice').innerText = 'Rp ' + (cost * 1.4).toLocaleString('id-ID') + ' (Profit 40%)';
+            document.getElementById('resCaption').innerText = `✨ Dapatkan ${name} sekarang juga! Kualitas terbaik dan harga bersahabat. Yuk order sekarang! 🔥`;
+            document.getElementById('promoResult').classList.remove('hidden');
+        }
+
+        function runContentAI() {
+            const topic = document.getElementById('cTopic').value;
+            if(!topic) { alert("Masukkan niche!"); return; }
+            document.getElementById('contentList').innerHTML = `<div class="p-3 bg-slate-50 dark:bg-slate-900 rounded border dark:border-slate-700 text-sm">🎥 Ide Video: Review jujur proses pembuatan ${topic} dalam 15 detik!</div>`;
+            document.getElementById('contentResult').classList.remove('hidden');
+        }
+
+        function loadHistory() {
+            let history = JSON.parse(localStorage.getItem('siswacraft_history') || '[]');
+            const container = document.getElementById('historyList');
+            if(history.length === 0) { container.innerHTML = `<p class="text-sm text-slate-400">Belum ada riwayat.</p>`; return; }
+            let html = '';
+            history.forEach(h => { html += `<div class="p-3 bg-slate-50 dark:bg-slate-900 rounded border dark:border-slate-700 text-sm font-mono">${h.text}</div>`; });
+            container.innerHTML = html;
+        }
+
+        function clearHistory() { localStorage.removeItem('siswacraft_history'); loadHistory(); }
+
+        window.onload = function() { updateWAPreview(); loadTransactions(); };
+    </script>
+</body>
+</html>
